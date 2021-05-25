@@ -18,8 +18,6 @@ app.get("/posts", (req, res) => {
 app.post("/events", (req, res) => {
   const { type, data } = req.body;
 
-  newFunction(type, data);
-
   handleEvent(type, data);
 
   res.send({});
@@ -28,7 +26,7 @@ app.post("/events", (req, res) => {
 app.listen(4002, async () => {
   console.log("App listen on 4002");
 
-  const res = await axios.get("http://localhost:4005/events");
+  const res = await axios.get("http://event-bus-srv:4005/events");
 
   for (let event of res.data) {
     console.log("processing event", event.type);
