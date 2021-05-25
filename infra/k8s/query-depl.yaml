@@ -11,7 +11,7 @@ spec:
     metadata:
       labels:
         app: query
-    spec: 
+    spec:
       containers:
         - name: query
           image: mahagney/query
@@ -22,8 +22,8 @@ metadata:
   name: query-srv
 spec:
   selector:
-    app:  query
-  ports: 
+    app: query
+  ports:
     - name: query
       protocol: TCP
       port: 4002
