@@ -12,16 +12,19 @@ app.post("/events", (req, res) => {
 
   events.push(event);
 
-  try {
-    axios.post("http://posts-clusterip-srv:4000/events", event);
-    axios.post("http://comments-srv:4001/events", event);
-    axios.post("http://query-srv:4002/events", event);
-    axios.post("http://moderation-srv:4003/events", event);
-  } catch (error) {
-    console.log(error + " ");
-  }
-
-  res.send({ status: "ok" });
+  axios.post("http://posts-clusterip-srv:4000/events", event).catch((err) => {
+    console.log(err.message);
+  });
+  axios.post("http://comments-srv:4001/events", event).catch((err) => {
+    console.log(err.message);
+  });
+  axios.post("http://query-srv:4002/events", event).catch((err) => {
+    console.log(err.message);
+  });
+  axios.post("http://moderation-srv:4003/events", event).catch((err) => {
+    console.log(err.message);
+  });
+  res.send({ status: "OK" });
 });
 
 app.get("/events", (req, res) => {
@@ -29,5 +32,5 @@ app.get("/events", (req, res) => {
 });
 
 app.listen(4005, () => {
-  console.log("listening on 4005");
+  console.log("Listening on 4005");
 });
